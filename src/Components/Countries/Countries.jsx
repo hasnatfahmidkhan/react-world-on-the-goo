@@ -11,6 +11,7 @@ const Countries = ({ countriesPromise }) => {
   };
   const handleVisitedFlags = (flag) => {
     setVisitedFlags([...VisitedFlags, flag]);
+    // console.log(flag.countryVisit)
   };
   return (
     <>
@@ -28,7 +29,7 @@ const Countries = ({ countriesPromise }) => {
           className="w-24 inline-block m-2"
         />
       ))}
-      <div className="grid grid-cols-3 gap-8 py-3 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-3 ">
         {countries.map((country) => (
           <Country
             key={country.cca3.cca3}

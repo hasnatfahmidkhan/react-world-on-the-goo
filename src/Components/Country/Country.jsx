@@ -42,12 +42,16 @@ const Country = ({ country, handleVisitedCountry, handleVisitedFlags }) => {
             {countryVisit ? "Visited" : "Not Visited"}
           </button>
           <button
-            className="btn ml-2"
+            className={`btn ml-2 `}
             onClick={() => {
-              handleVisitedFlags({ svg: svg, alt: alt });
+              handleVisitedFlags({
+                svg: svg,
+                alt: alt,
+              });
+              handleCountryVisit();
             }}
           >
-            Add to visited
+            {countryVisit ? "Added visited" : "Add to visited"}
           </button>
         </div>
       </div>
