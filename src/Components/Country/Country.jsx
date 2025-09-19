@@ -1,29 +1,55 @@
-import React from "react";
-
-const Country = ({ country }) => {
+import React, { useState } from "react";
+import "./country.css";
+const Country = ({ country, handleVisitedCountry, handleVisitedFlags }) => {
   // console.log();
-  const { common, official } = country.name;
-  // console.log(country.flags);
+  const { common } = country.name;
+  // console.log(country.area.area);
   const { svg, alt } = country.flags.flags;
+  const [countryVisit, SetCountryVisit] = useState(false);
+  const handleCountryVisit = () => {
+    // 1st - basic system
+    // if (countryVisit) {
+    //   SetCountryVisit(false);
+    // } else {
+    //   SetCountryVisit(true);
+    // }
+
+    // 2. ternary conditional rendering
+    // countryVisit ? SetCountryVisit(false) : SetCountryVisit(true);
+
+    // 3. third system toggle system use ! operator
+    SetCountryVisit(!countryVisit);
+    handleVisitedCountry(country);
+  };
+  // console.log(countryVisit);
   return (
     <>
-      <div className="">
-        <div className="collapse collapse-arrow">
-          <input type="radio" name="my-accordion-2" defaultChecked />
-          <div className="collapse-title font-semibold flex items-center gap-3">
-            <img className="w-16 h-10" src={svg} alt={alt} />
-            <h3 className="text-xl">{common}</h3>
-          </div>
-          <div className="collapse-content text-sm ">
-            Click the "Sign Up" button in the top right corner and follow the
-            registration process.
-          </div>
+      <div
+        className={`border p-4 rounded-xl space-y-2.5 ${
+          countryVisit && "visited-country"
+        }`}
+      >
+        <img className="rounded-xl " src={svg} alt={alt} />
+        <div className="mt-5 space-y-2">
+          <h3 className="text-xl">Country Name: {common}</h3>
+          <p className="text-xl ">
+            {country.area.area >= 580367
+              ? `${common} is Big Country`
+              : `${common} is small country`}
+          </p>
+          <button onClick={handleCountryVisit} className="btn  mt-2">
+            {/* {countryVisit ? "Visited" : "Not Visited"} */}
+            {countryVisit ? "Visited" : "Not Visited"}
+          </button>
+          <button
+            className="btn ml-2"
+            onClick={() => {
+              handleVisitedFlags({ svg: svg, alt: alt });
+            }}
+          >
+            Add to visited
+          </button>
         </div>
-
-        {/* <div className="flex items-center  gap-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-black hover:rounded-lg pl-1 py-5">
-         
-          
-        </div> */}
       </div>
     </>
   );
